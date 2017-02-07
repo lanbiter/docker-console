@@ -1,12 +1,15 @@
 from flask import Flask
 from flask import render_template
 from flask_sockets import Sockets
-import docker,time
+import docker
+import time
+import configure 
 
 
 app = Flask(__name__)
 sockets = Sockets(app)
-docker_client = docker.Client(base_url='tcp://100.73.35.8:2375',version='1.24',timeout=10)
+docker_client = docker.Client(base_url=configure.DOCKER_HOST,
+         version=configure.DOCKER_API_VERSION,timeout=configure.TIME_OUT)
 
 
 @app.route('/')
@@ -14,13 +17,12 @@ def hello_world():
     return render_template('index.html')
 
 def create_exec():
-   id ='3b5e25b3f62d'
    command = ["bash"]
    create_exec_options = {
        "tty": True,
        "stdin": True,
    }
-   exec_id = docker_client.exec_create(id, command, **create_exec_options)
+   exec_id = docker_client.exec_create(configure.CONTAINER_ID, command, **create_exec_options)
    return exec_id
 
 @sockets.route('/echo')

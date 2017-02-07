@@ -1,0 +1,6 @@
+docker-py==1.10.6
+gevent==1.2.1
+Flask==0.12
+Flask-Sockets==0.2.1
+gevent-websocket==0.9.5
+gunicorn==19.6.0
