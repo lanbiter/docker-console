@@ -4,5 +4,5 @@ DOCKER_HOST = 'tcp://100.73.35.8:2375'
 DOCKER_API_VERSION = '1.24'
 TIME_OUT = 10
 # container_id for test
-CONTAINER_ID = 'c222730a59f2'
+CONTAINER_ID = '3b5e25b3f62d'
 

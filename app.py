@@ -4,6 +4,7 @@ from flask_sockets import Sockets
 import docker
 import time
 import configure 
+from thread_send import threadSend
 
 
 app = Flask(__name__)
@@ -17,7 +18,7 @@ def hello_world():
     return render_template('index.html')
 
 def create_exec():
-   command = ["bash"]
+   command = ["/bin/sh","-c",'TERM=xterm-256color; export TERM; [ -x /bin/bash ] && ([ -x /usr/bin/script ] && /usr/bin/script -q -c "/bin/bash" /dev/null || exec /bin/bash) || exec /bin/sh']
    create_exec_options = {
        "tty": True,
        "stdin": True,
@@ -30,16 +31,13 @@ def echo_socket(ws):
     exec_id = create_exec()
     sock = docker_client.exec_start(exec_id, detach=False, tty=True, stream=False,
                    socket=True)
+    sock.settimeout(600)
+    send = threadSend(ws,sock)
+    send.start()
     while not ws.closed:
         message = ws.receive()
-        sock.send(message)
-        print message
-        time.sleep(0.2)
-        resp = sock.recv(1024)
-        print 'resp:',resp
-        if resp is not None:
-            ws.send(resp)
-
+        if message is not None:
+            sock.send(message)
 
 if __name__ == '__main__':
     from gevent import pywsgi
