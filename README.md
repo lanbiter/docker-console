@@ -5,4 +5,6 @@
 <p>3, vim configure.py</p>
 <p>4, fix DOCKER_HOST and DOCKER_API_VERSION according to your own situation and set timeout</p>
 <p>5, choice a containerID(running) in you DOCKER_HOST and set CONTAINER_ID</p>
-<p>6, execute start.sh and visit http://<your web host>:5000/</p>
+<p>6, execute start.sh and visit http://(website):5000/</p>
+<hr>
+<img src='static/show.png'>
