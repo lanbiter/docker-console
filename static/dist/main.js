@@ -38,7 +38,6 @@ function createTerminal() {
       cols = 80,
       rows = 24;
 
-  // socketURL = 'ws://100.73.35.8:2375/v1.24/containers/' + containerId + '/attach/ws?logs=0&stream=1&stdin=1&stdout=1&stderr=1';
   var host = window.location.hostname + ':' + window.location.port + '/';
   socketURL = 'ws://'+host+'/echo';
   console.log(socketURL)
