@@ -9,8 +9,7 @@ from thread_send import threadSend
 
 app = Flask(__name__)
 sockets = Sockets(app)
-docker_client = docker.Client(base_url=configure.DOCKER_HOST,
-         version=configure.DOCKER_API_VERSION,timeout=configure.TIME_OUT)
+docker_client = docker.client.from_env(version="auto")
 
 
 @app.route('/')
@@ -31,6 +30,8 @@ def echo_socket(ws):
     exec_id = create_exec()
     sock = docker_client.exec_start(exec_id, detach=False, tty=True, stream=False,
                    socket=True)
+    #docker_client.api.exec_resize(exec_id,height=100,width=118)
+    docker_client.exec_resize(exec_id,height=100,width=118)
     sock.settimeout(600)
     send = threadSend(ws,sock)
     send.start()
