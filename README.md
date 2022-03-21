@@ -10,3 +10,9 @@
 <p>7, execute start.sh and visit http://(website):5000/</p>
 <hr>
 <img src='static/show.png'>
+
+
+打赏：
+
+
+![image](https://user-images.githubusercontent.com/10483310/159258692-ba76ccea-7a96-4aac-8b28-77f9e4d3a775.png)
