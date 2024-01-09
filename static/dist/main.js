@@ -80,4 +80,4 @@ function runFakeTerminal() {
   term.on('paste', function (data, ev) {
     term.write(data);
   });
-}:
+}
